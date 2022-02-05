@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using dotnetWithMosh.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnetWithMosh
 {
@@ -27,11 +29,17 @@ namespace dotnetWithMosh
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<DataContext>(option => {
+                option.UseSqlServer(Configuration.GetConnectionString("DbConStr"));
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "dotnetWithMosh", Version = "v1" });
             });
+
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
