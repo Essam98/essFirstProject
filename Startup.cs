@@ -37,6 +37,7 @@ namespace dotnetWithMosh
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "dotnetWithMosh", Version = "v1" });
             });
+            services.AddAutoMapper(typeof(Startup));
 
 
             

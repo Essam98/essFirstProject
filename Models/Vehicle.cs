@@ -12,7 +12,6 @@ namespace dotnetWithMosh.Models
     {
         public int Id { get; set; }
         public int ModelId { get; set; }
-        public Model Model { get; set; }
         public bool IsRegistered { get; set; }
         [Required]
         public string ContactName { get; set; }

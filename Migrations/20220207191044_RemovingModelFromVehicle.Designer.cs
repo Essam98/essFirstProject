@@ -10,8 +10,8 @@ using dotnetWithMosh.Data;
 namespace dotnetWithMosh.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220205162530_Add_DateTimeToVehicle")]
-    partial class Add_DateTimeToVehicle
+    [Migration("20220207191044_RemovingModelFromVehicle")]
+    partial class RemovingModelFromVehicle
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,7 +57,7 @@ namespace dotnetWithMosh.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Model");
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("dotnetWithMosh.Models.Vehicle", b =>
@@ -82,8 +82,6 @@ namespace dotnetWithMosh.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ModelId");
-
                     b.ToTable("Vehicles");
                 });
 
@@ -98,14 +96,6 @@ namespace dotnetWithMosh.Migrations
                     b.HasIndex("FeatureId");
 
                     b.ToTable("VehicleFeatures");
-                });
-
-            modelBuilder.Entity("dotnetWithMosh.Models.Vehicle", b =>
-                {
-                    b.HasOne("dotnetWithMosh.Models.Model", "Model")
-                        .WithMany()
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("dotnetWithMosh.Models.VehicleFeature", b =>

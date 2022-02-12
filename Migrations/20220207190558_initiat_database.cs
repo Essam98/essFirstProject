@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace dotnetWithMosh.Migrations
@@ -57,7 +58,7 @@ namespace dotnetWithMosh.Migrations
                     ContactName = table.Column<string>(nullable: false),
                     ContactEmail = table.Column<string>(nullable: true),
                     ContactPhone = table.Column<string>(nullable: false),
-                    LastUpdate = table.Column<string>(nullable: true)
+                    LastUpdate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

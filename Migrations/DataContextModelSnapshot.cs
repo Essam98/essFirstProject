@@ -55,7 +55,7 @@ namespace dotnetWithMosh.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Model");
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("dotnetWithMosh.Models.Vehicle", b =>
@@ -80,8 +80,6 @@ namespace dotnetWithMosh.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ModelId");
-
                     b.ToTable("Vehicles");
                 });
 
@@ -96,14 +94,6 @@ namespace dotnetWithMosh.Migrations
                     b.HasIndex("FeatureId");
 
                     b.ToTable("VehicleFeatures");
-                });
-
-            modelBuilder.Entity("dotnetWithMosh.Models.Vehicle", b =>
-                {
-                    b.HasOne("dotnetWithMosh.Models.Model", "Model")
-                        .WithMany()
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("dotnetWithMosh.Models.VehicleFeature", b =>
