@@ -8,8 +8,7 @@ namespace dotnetWithMosh.Dto.Vehicles
 {
  
     public class VehicleResource
-    {
-        public int Id { get; set; }
+    { 
         public int ModelId { get; set; } 
         public bool IsRegistered { get; set; }
         public ContactResours Contact { get; set; } 

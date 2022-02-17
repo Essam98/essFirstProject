@@ -14,7 +14,7 @@ namespace dotnetWithMosh.Mapping
                      .ForMember(v => v.Contact, opt => opt.MapFrom(vr => new ContactResours {
                          Name = vr.ContactName,
                          Email = vr.ContactEmail,
-                         Phone = vr.ContactPhone,
+                         Phone = vr.ContactPhone, 
                      }))
                      .ForMember(v => v.Features, opt => opt.MapFrom(v => v.Features.Select(vr => vr.FeatureId)));
             

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using dotnetWithMosh.Data;
@@ -24,6 +25,16 @@ namespace dotnetWithMosh.Controllers
         
         [HttpPost]
         public async Task<IActionResult>  CreateVehicle([FromBody] VehicleResource vehicleResource) {
+
+            // if (ModelState.IsValid) 
+                // return BadRequest(ModelState);
+            
+            // var model = await _db.Models.FindAsync(vehicleResource.ModelId);
+            // if (model == null) {
+                // ModelState.AddModelError("ModelId", "Invalid Model Id");
+                // return BadRequest(ModelState);
+            // }
+            
             var vehicle = _mapper.Map<VehicleResource, Vehicle>(vehicleResource);
             _db.Vehicles.Add(vehicle);
             await _db.SaveChangesAsync();
