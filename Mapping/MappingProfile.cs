@@ -2,6 +2,7 @@ using AutoMapper;
 using dotnetWithMosh.Models;
 using dotnetWithMosh.Dto.Vehicles;
 using System.Linq;
+using dotnetWithMosh.Dto.Modal;
 
 namespace dotnetWithMosh.Mapping
 {
@@ -24,6 +25,8 @@ namespace dotnetWithMosh.Mapping
                      .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vr => vr.Contact.Phone))
                      .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vr => vr.Contact.Phone))
                      .ForMember(v => v.Features, opt => opt.MapFrom(vr => vr.Features.Select(id => new VehicleFeature { FeatureId = id })));
+
+           
         }
     }
 }

@@ -11,7 +11,7 @@ namespace dotnetWithMosh.Controllers
     [ApiController]
     [Route("api/vehicles")]
     public class VehiclesController : ControllerBase
-    { 
+    {
         private readonly IMapper _mapper;
         private readonly DataContext _db;
 
@@ -21,26 +21,76 @@ namespace dotnetWithMosh.Controllers
             this._mapper = mapper;
             this._db = db;
         }
-        
-        
+
+
         [HttpPost]
-        public async Task<IActionResult>  CreateVehicle([FromBody] VehicleResource vehicleResource) {
+        public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource)
+        { 
 
-            // if (ModelState.IsValid) 
-                // return BadRequest(ModelState);
-            
-            // var model = await _db.Models.FindAsync(vehicleResource.ModelId);
-            // if (model == null) {
-                // ModelState.AddModelError("ModelId", "Invalid Model Id");
-                // return BadRequest(ModelState);
-            // }
-            
-            var vehicle = _mapper.Map<VehicleResource, Vehicle>(vehicleResource);
-            _db.Vehicles.Add(vehicle);
-            await _db.SaveChangesAsync();
+            try
+            {
+                var model = await _db.Models.FindAsync(vehicleResource.ModelId);
+                if (model == null)
+                {
+                    ModelState.AddModelError("ModelId", vehicleResource?.ModelId + " is Invalid Model Id");
+                    return BadRequest(ModelState);
+                }
 
-            var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
-            return Ok(result);
+                foreach (var feature in vehicleResource.Features)
+                {
+                    var featureObject = await _db.Features.FindAsync(feature);
+                    if (featureObject == null)
+                    {
+                        ModelState.AddModelError("FeatureId", "Connot Find Feature ID with Id " + feature);
+                        return BadRequest(ModelState);
+                    }
+                }
+ 
+                var vehicle = _mapper.Map<VehicleResource, Vehicle>(vehicleResource);
+                vehicle.LastUpdate = DateTime.Now;
+                _db.Vehicles.Add(vehicle);
+                await _db.SaveChangesAsync();
+
+                var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
+                return Ok(result);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            } 
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateVehicle(int id, [FromBody] VehicleResource vehicleResource)
+        { 
+
+            try
+            {
+                var vehicle = await _db.Vehicles.FindAsync(id);
+                _mapper.Map<VehicleResource, Vehicle>(vehicleResource, vehicle);
+                vehicle.LastUpdate = DateTime.Now; 
+                await _db.SaveChangesAsync();
+
+                var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
+                return Ok(result);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            } 
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        
     }
 }

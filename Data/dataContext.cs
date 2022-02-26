@@ -22,7 +22,7 @@ namespace dotnetWithMosh.Data
         {
             if (!options.IsConfigured)
             {
-                options.UseSqlServer("Server=DESKTOP-53QPPU9; Database=University; Trusted_Connection=True");
+                options.UseSqlServer("Server=DESKTOP-53QPPU9; Database=car; Trusted_Connection=True");
             }
         }
  

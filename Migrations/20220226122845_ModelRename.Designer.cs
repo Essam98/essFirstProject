@@ -10,8 +10,8 @@ using dotnetWithMosh.Data;
 namespace dotnetWithMosh.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220207191044_RemovingModelFromVehicle")]
-    partial class RemovingModelFromVehicle
+    [Migration("20220226122845_ModelRename")]
+    partial class ModelRename
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,7 @@ namespace dotnetWithMosh.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Name");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -53,7 +53,7 @@ namespace dotnetWithMosh.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Name");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 

@@ -25,7 +25,7 @@ namespace dotnetWithMosh.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Name");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -51,7 +51,7 @@ namespace dotnetWithMosh.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Name");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 

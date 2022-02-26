@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using dotnetWithMosh.Data;
 using Microsoft.EntityFrameworkCore;
+using dotnetWithMosh.Services.Modal;
 
 namespace dotnetWithMosh
 {
@@ -25,9 +26,10 @@ namespace dotnetWithMosh
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IModalService, ModalService>();
 
             services.AddDbContext<DataContext>(option => {
                 option.UseSqlServer(Configuration.GetConnectionString("DbConStr"));

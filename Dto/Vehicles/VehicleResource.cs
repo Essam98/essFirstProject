@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using dotnetWithMosh.Models;
 
@@ -11,6 +12,7 @@ namespace dotnetWithMosh.Dto.Vehicles
     { 
         public int ModelId { get; set; } 
         public bool IsRegistered { get; set; }
+        [Required]
         public ContactResours Contact { get; set; } 
         public ICollection<int> Features { get; set; }
 

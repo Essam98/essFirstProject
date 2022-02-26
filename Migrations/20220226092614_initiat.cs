@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace dotnetWithMosh.Migrations
 {
-    public partial class initiat_database : Migration
+    public partial class initiat : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace dotnetWithMosh.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -35,16 +35,16 @@ namespace dotnetWithMosh.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Model",
+                name: "Models",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Model", x => x.Id);
+                    table.PrimaryKey("PK_Models", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,12 +63,6 @@ namespace dotnetWithMosh.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehicles", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Vehicles_Model_ModelId",
-                        column: x => x.ModelId,
-                        principalTable: "Model",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,17 +93,15 @@ namespace dotnetWithMosh.Migrations
                 name: "IX_VehicleFeatures_FeatureId",
                 table: "VehicleFeatures",
                 column: "FeatureId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_ModelId",
-                table: "Vehicles",
-                column: "ModelId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Makes");
+
+            migrationBuilder.DropTable(
+                name: "Models");
 
             migrationBuilder.DropTable(
                 name: "VehicleFeatures");
@@ -119,9 +111,6 @@ namespace dotnetWithMosh.Migrations
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
-
-            migrationBuilder.DropTable(
-                name: "Model");
         }
     }
 }

@@ -10,8 +10,8 @@ using dotnetWithMosh.Data;
 namespace dotnetWithMosh.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220207190558_initiat_database")]
-    partial class initiat_database
+    [Migration("20220226092614_initiat")]
+    partial class initiat
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,7 @@ namespace dotnetWithMosh.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Name");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -53,11 +53,11 @@ namespace dotnetWithMosh.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Name");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Model");
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("dotnetWithMosh.Models.Vehicle", b =>
@@ -82,8 +82,6 @@ namespace dotnetWithMosh.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ModelId");
-
                     b.ToTable("Vehicles");
                 });
 
@@ -98,14 +96,6 @@ namespace dotnetWithMosh.Migrations
                     b.HasIndex("FeatureId");
 
                     b.ToTable("VehicleFeatures");
-                });
-
-            modelBuilder.Entity("dotnetWithMosh.Models.Vehicle", b =>
-                {
-                    b.HasOne("dotnetWithMosh.Models.Model", "Model")
-                        .WithMany()
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("dotnetWithMosh.Models.VehicleFeature", b =>

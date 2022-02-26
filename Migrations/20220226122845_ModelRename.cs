@@ -2,7 +2,7 @@
 
 namespace dotnetWithMosh.Migrations
 {
-    public partial class UpdateVehicleResourceModel : Migration
+    public partial class ModelRename : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
