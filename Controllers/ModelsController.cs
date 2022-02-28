@@ -9,12 +9,12 @@ namespace dotnetWithMosh.Controllers
 {
     [ApiController]
     [Route("api/models")]
-    public class modelsControlles : ControllerBase
+    public class ModelsController : ControllerBase
     {
 
         private readonly DataContext _db;
         private readonly IModalService _service;
-        public modelsControlles(DataContext db, IModalService service)
+        public ModelsController(DataContext db, IModalService service)
         {
             this._db = db;
             this._service = service;

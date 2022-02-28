@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using dotnetWithMosh.Data;
@@ -60,19 +61,30 @@ namespace dotnetWithMosh.Controllers
             } 
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateVehicle(int id, [FromBody] VehicleResource vehicleResource)
-        { 
-
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> UpdateVehicle(int id, [FromBody] VehicleResource vehicleResource)
+        {  
             try
             {
                 var vehicle = await _db.Vehicles.FindAsync(id);
-                _mapper.Map<VehicleResource, Vehicle>(vehicleResource, vehicle);
-                vehicle.LastUpdate = DateTime.Now; 
+
+                if (vehicle == null) {
+                    return NotFound("Object with Id " + id + " is not found");
+                }
+
+                vehicle.ModelId = vehicleResource.ModelId;
+                vehicle.ContactName = vehicleResource.Contact.Name;
+                vehicle.ContactPhone = vehicleResource.Contact.Phone;
+                vehicle.ContactEmail = vehicleResource.Contact.Email;
+                // vehicle.Features = vehicleResource.Features;
+
+
+                vehicle.LastUpdate = DateTime.Now;
+
+                _db.Vehicles.Update(vehicle);
                 await _db.SaveChangesAsync();
 
-                var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
-                return Ok(result);
+                return Ok(vehicle);
             }
             catch (System.Exception ex)
             {

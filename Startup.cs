@@ -14,6 +14,8 @@ using Microsoft.OpenApi.Models;
 using dotnetWithMosh.Data;
 using Microsoft.EntityFrameworkCore;
 using dotnetWithMosh.Services.Modal;
+using dotnetWithMosh.Services;
+using dotnetWithMosh.Services.Features;
 
 namespace dotnetWithMosh
 {
@@ -30,6 +32,8 @@ namespace dotnetWithMosh
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IModalService, ModalService>();
+            services.AddScoped<IMakeService, MakeService>();
+            services.AddScoped<IFeatureService, FeatureService>();
 
             services.AddDbContext<DataContext>(option => {
                 option.UseSqlServer(Configuration.GetConnectionString("DbConStr"));
